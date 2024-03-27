@@ -17,7 +17,7 @@ function loadStudents() {
 
 function saveStudents() {
   fetch('students.json', {
-    method: 'PUT', // Вказуємо метод PUT для оновлення файлу
+    method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
     },
