@@ -1,16 +1,31 @@
 function loadStudents() {
   fetch('students.json')
-    .then(response => response.json())
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to load students data');
+      }
+      return response.json();
+    })
     .then(data => {
       students = data;
       displayStudents();
     })
+    .catch(error => {
+      console.error('Error loading students data:', error);
+    });
 }
 
 function saveStudents() {
   fetch('students.json', {
-    body: JSON.stringify(students),
+    method: 'PUT', // Вказуємо метод PUT для оновлення файлу
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(students)
   })
+  .catch(error => {
+    console.error('Error saving students data:', error);
+  });
 }
 
 let students = [];
@@ -66,6 +81,15 @@ function displayStudents() {
 function deleteStudent(index) {
   students.splice(index, 1);
   displayStudents();
+}
+
+function clearFormFields() {
+  document.getElementById('firstName').value = '';
+  document.getElementById('lastName').value = '';
+  document.getElementById('age').value = '';
+  document.getElementById('year').value = '';
+  document.getElementById('faculty').value = '';
+  document.getElementById('courses').value = '';
 }
 
 loadStudents();
