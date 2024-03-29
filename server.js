@@ -52,7 +52,7 @@ function addStudent(event) {
 
   displayStudents();
   clearFormFields();
-  saveStudents();
+  saveStudents(); // Оновлюємо дані у файлі після додавання нового студента
 }
 
 function displayStudents() {
@@ -81,6 +81,7 @@ function displayStudents() {
 function deleteStudent(index) {
   students.splice(index, 1);
   displayStudents();
+  saveStudents(); // Оновлюємо дані у файлі після видалення студента
 }
 
 function clearFormFields() {
@@ -95,3 +96,5 @@ function clearFormFields() {
 loadStudents();
 const form = document.getElementById('studentForm');
 form.addEventListener('submit', addStudent);
+
+
